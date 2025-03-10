@@ -1,6 +1,6 @@
 from datetime import datetime
-from fetch_data import *
-from util import format_duration, is_less_than_2_months_old, format_iso_date, format_date_ddmmyyyy, get_language_distribution, get_langugage_percent
+from github_tools.fetch_data import *
+from github_tools.util import format_duration, is_less_than_2_months_old, format_iso_date, format_date_ddmmyyyy, get_language_distribution, get_langugage_percent
 
 def get_contribution_stats(username:str):
     """
