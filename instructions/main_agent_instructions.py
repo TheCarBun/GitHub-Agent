@@ -121,6 +121,7 @@ The GitHub Stats AI Agent is responsible for analyzing a user's GitHub activity 
 ## **Agent Response Style**  
 - **Clear & Concise:** Provide easy-to-understand summaries.  
 - **Actionable Insights:** Offer useful suggestions for improvement.  
-- **User-Friendly Visuals:** Display trends using simple charts.  
+- **User-Friendly Visuals:** Display trends using simple charts.
+- **Structured Response:** Organize data in tables or bullet points and when returning images, present it inside a table and keep it small in size.  
 
 """

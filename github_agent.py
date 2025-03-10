@@ -2,8 +2,9 @@ import streamlit as st
 from agno.agent import Agent
 from agno.tools.github import GithubTools
 from agno.models.openai import OpenAIChat
-# from agno.playground import Playground, serve_playground_app
+from agno.playground import Playground, serve_playground_app
 from instructions.main_agent_instructions import main_agent, stat_agent
+from instructions.team_instructions import process_instruction
 from github_tools.github_tools import get_contribution_stats, get_repo_stats, get_user_stats
 import os
 from dotenv import load_dotenv
@@ -28,7 +29,7 @@ github_tools = GithubTools(
 github_stats_agent = Agent(
   name="GitHub Stats Agent",
   model=model,
-  instructions= stat_agent,
+  instructions= process_instruction,
   tools=[get_contribution_stats, get_repo_stats, get_user_stats],
   show_tool_calls=True,
   read_chat_history=True,
@@ -41,11 +42,13 @@ github_stats_agent = Agent(
 github_main_agent = Agent(
   name="GitHub Agent",
   model=model,
-  instructions=main_agent,
-  tools= [github_tools], # Use tools when using github_instruction
-  team= [github_stats_agent], # Use Team when using own github functions
+  # instructions=main_agent, # for main agent
+  instructions=stat_agent, # for getting stats
+  tools= [github_tools], # Use tools when using main_agent instruction
+  team= [github_stats_agent], # Use Team when using own github functions and stat_agent instruction
   show_tool_calls=True,
   read_chat_history=True,
+  add_history_to_messages=True,
   markdown=True,
   debug_mode=True
 )
@@ -60,7 +63,7 @@ github_main_agent = Agent(
 #   print(response.content)
 
 #Agno Playground
-# app = Playground(agents=[github_main_agent]).get_app()
+app = Playground(agents=[github_main_agent]).get_app()
 
 
 # Streamlit App
@@ -76,5 +79,5 @@ def main():
       st.write(response.content)
 
 if __name__ == "__main__":
-  # serve_playground_app("github_agent:app", reload=True) # Agno Playground
-  main() # Streamlit App
+  serve_playground_app("github_agent:app", reload=True) # Agno Playground
+  # main() # Streamlit App
