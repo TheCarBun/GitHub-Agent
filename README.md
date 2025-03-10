@@ -9,6 +9,8 @@
 
 GitHub Agent is a powerful tool designed to fetch user, repository, and contribution details from GitHub. It provides a detailed analysis of a user's statistics and can assist users with any GitHub-related queries.
 
+![demo gif](github-agent.gif)
+
 ## 🛠️ Tech Used
 
 ![Python](https://img.shields.io/badge/Python-3.11.9-blue)
