@@ -1,6 +1,11 @@
 import streamlit as st
 from github_agent import github_main_agent
 
+def promo():
+  with open("./static/sidebar.html", "r", encoding="UTF-8") as sidebar_file:
+    sidebar_html = sidebar_file.read()
+  st.html(sidebar_html)
+
 # Streamlit App
 def main():
 
@@ -38,6 +43,7 @@ def main():
 
   Let's dive into your GitHub stats! 🚀
   """)
+    promo()
 
   prompt = st.chat_input("Type something...")
 
