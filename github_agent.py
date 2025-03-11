@@ -1,4 +1,3 @@
-import streamlit as st
 from agno.agent import Agent
 from agno.tools.github import GithubTools
 from agno.models.openai import OpenAIChat
@@ -65,19 +64,5 @@ github_main_agent = Agent(
 #Agno Playground
 app = Playground(agents=[github_main_agent]).get_app()
 
-
-# Streamlit App
-def main():
-  prompt = st.chat_input("Type something...")
-
-  if prompt:
-    with st.chat_message('user'):
-      st.write(prompt)
-    response = github_main_agent.run(prompt)
-
-    with st.chat_message('ai'):
-      st.write(response.content)
-
 if __name__ == "__main__":
   serve_playground_app("github_agent:app", reload=True) # Agno Playground
-  # main() # Streamlit App
